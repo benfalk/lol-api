@@ -53,7 +53,7 @@ module LOL
       end
 
       def summoner_by_ids(*ids)
-        "/api/lol/#{region}/v1.4/summoner/#{ids}"
+        "/api/lol/#{region}/v1.4/summoner/#{ids.join(',')}"
       end
 
       def summoner_masteries_by_ids(*ids)
