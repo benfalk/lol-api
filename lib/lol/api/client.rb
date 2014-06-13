@@ -7,7 +7,7 @@ module LOL
       
       def initialize(opts={})
         @key = opts.fetch(:api_key){ LOL::Api.key }
-        @conn = Faraday.new url: 'https://prod.api.pvp.net'
+        @conn = Faraday.new url: url_host(opts)
         @urls = URLS.new(opts)
       end
       
@@ -25,6 +25,15 @@ module LOL
         response = @conn.get(url,api_key: @key)
         
         JSON.parse(response.body)
+      end
+
+      def url_host(opts)
+        case opts[:region]
+          when 'euw'
+            'https://euw.api.pvp.net'
+          else
+            'https://prod.api.pvp.net'
+        end
       end
 
     end
